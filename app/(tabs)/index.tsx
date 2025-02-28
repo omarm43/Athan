@@ -24,7 +24,6 @@ export default function Index() {
     const month = String(datee.getMonth() + 1).padStart(2, '0'); // Months are zero-based
     const year = datee.getFullYear();
     const d = `${day}-${month}-${year}`;
-    console.log("Current date:", d);
     const response = await fetch(`http://api.aladhan.com/v1/timings/${d}?latitude=${location.coords.latitude}&longitude=${location.coords.longitude}&method=2&`);
     const data = await response.json();
     setPrayerTimes(data.data.timings);

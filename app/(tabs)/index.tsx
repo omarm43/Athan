@@ -9,6 +9,8 @@ export default function Index() {
   const [prayerTimes, setPrayerTimes] = useState<any | null>(null);
   const [date, setDate] = useState<any | null>(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [currentDay, setCurrentDay] = useState(new Date().getDate());
 
   const fetchPrayerTimes = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
@@ -28,11 +30,21 @@ export default function Index() {
     const data = await response.json();
     setPrayerTimes(data.data.timings);
     setDate(data.data.date);
+    // console.log("Prayer times fetched");
   };
 
   useEffect(() => {
     fetchPrayerTimes();
-  }, []);
+    const interval = setInterval(() => {
+      const now = new Date();
+      setCurrentTime(now);
+      if (now.getDate() !== currentDay) {
+        setCurrentDay(now.getDate());
+        fetchPrayerTimes();
+      }
+    }, 1000); // Update every second
+    return () => clearInterval(interval);
+  }, [currentDay]);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -53,6 +65,28 @@ export default function Index() {
     return `${adjustedHour}:${minute < 10 ? '0' : ''}${minute} ${ampm}`;
   }
 
+  function getClosestPrayerTime(prayerTimes: any): string {
+    const now = new Date();
+    const times = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"];
+    let closestTime = times[0];
+    let minDiff = Infinity;
+
+    times.forEach(time => {
+      const [hour, minute] = prayerTimes[time].split(':').map(Number);
+      const prayerTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minute);
+      const diff = Math.abs(prayerTime.getTime() - now.getTime());
+
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestTime = time;
+      }
+    });
+
+    return closestTime;
+  }
+
+  const closestPrayerTime = prayerTimes ? getClosestPrayerTime(prayerTimes) : null;
+
   return (
     <ScrollView
       contentContainerStyle={{
@@ -64,42 +98,41 @@ export default function Index() {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
       showsVerticalScrollIndicator={false} // Hide vertical scrollbar
-      // showsHorizontalScrollIndicator={false} // Hide horizontal scrollbar
+    // showsHorizontalScrollIndicator={false} // Hide horizontal scrollbar
     >
       {refreshing && (
-      <View style={{ position: 'absolute', top: 0, left: 0, right: 0, alignItems: 'center' }}>
-        <ActivityIndicator size="large" color="#000000" />
-      </View>
-      )}
-      {/* <Text>Edit app/index.tsx to edit this screen.</Text>
-      <Link href="/direction">
-        Go to About screen
-      </Link> */}
-      <Text>{new Date().toLocaleString()}</Text>
-      <Text>{text}</Text>
-      
-      {prayerTimes && (
-        <View
-          style={{
-            alignItems: "center",
-          }}>
-          <Text>Fajr: {convertTo12HourFormat(prayerTimes.Fajr)} </Text>
-          <Text>Sunrise: {convertTo12HourFormat(prayerTimes.Sunrise)}</Text>
-          <Text>Dhuhr: {convertTo12HourFormat(prayerTimes.Dhuhr)}</Text>
-          <Text>Asr: {convertTo12HourFormat(prayerTimes.Asr)}</Text>
-          <Text>Maghrib: {convertTo12HourFormat(prayerTimes.Maghrib)} </Text>
-          <Text>Isha: {convertTo12HourFormat(prayerTimes.Isha)}</Text>
+        <View style={{ position: 'absolute', top: 0, left: 0, right: 0, alignItems: 'center' }}>
+          <ActivityIndicator size="large" color="#000000" />
         </View>
       )}
+
       {date && (
         <View
           style={{
-            alignItems: "center",
+            alignItems: "center"
           }}>
           <Text>{date.gregorian.month.en} {date.gregorian.day}, {date.gregorian.year}</Text>
           <Text>{date.hijri.month.en} {date.hijri.day}, {date.hijri.year}</Text>
         </View>
       )}
+
+      <Text style={{ marginVertical: 20 }}>{currentTime.toLocaleTimeString("en-US")}</Text>
+
+      {prayerTimes && (
+        <View
+          style={{
+            alignItems: "center",
+          }}>
+          {["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"].map((time) => (
+            <Text key={time} style={closestPrayerTime === time ? { fontWeight: 'bold', color: 'green' } : {}}>
+              {time}: {convertTo12HourFormat(prayerTimes[time])}
+            </Text>
+          ))}
+        </View>
+      )}
+
+      <Text style={{ marginVertical: 20 }}>{text}</Text>
+
     </ScrollView>
   );
 }

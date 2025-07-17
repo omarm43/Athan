@@ -1,4 +1,4 @@
-# 🕌 Athan – Muslim Prayer Times App
+# 🕌 Athan – Muslim Prayer Times App (work in progress)
 
 Athan is a mobile app built with React Native and Expo that displays daily Muslim prayer times based on your real-time location. It uses the Aladhan API (https://aladhan.com/prayer-times-api) to fetch accurate timings and displays both Gregorian and Hijri dates.
 

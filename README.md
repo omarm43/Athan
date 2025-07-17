@@ -61,7 +61,7 @@ athan/
 ## 📄 License
 
 MIT License  
-© 2025 Your Name
+© 2024 Omar Mostafiz
 
 ## 🙏 Acknowledgments
 

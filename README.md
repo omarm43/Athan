@@ -1,47 +1,70 @@
-##🕌 Athan – Muslim Prayer Times App (Work In Progress)
-Athan is a lightweight mobile app built with React Native and Expo that shows daily Muslim prayer times based on your real-time location. It fetches data from the Aladhan API and supports pull-to-refresh, both Gregorian and Hijri calendars, and 12-hour formatting.
+# 🕌 Athan – Muslim Prayer Times App
 
-#📱 Features
-📍 Auto-detects location to display prayer times
-🕰️ Fajr, Dhuhr, Asr, Maghrib, Isha + Sunrise
-🔁 Pull-to-refresh to update times and location
-📆 Shows both Gregorian and Hijri dates
-⏱ Converts times to 12-hour AM/PM format
+Athan is a mobile app built with React Native and Expo that displays daily Muslim prayer times based on your real-time location. It uses the Aladhan API (https://aladhan.com/prayer-times-api) to fetch accurate timings and displays both Gregorian and Hijri dates.
 
-⚡ Built using Expo Router for fast routing and navigation
+## 📱 Features
 
-#🧰 Tech Stack
-React Native (via Expo)
-Expo Router for file-based navigation
-expo-location for GPS access
-Aladhan API for prayer time data
-TypeScript for static typing
-Jest for testing
+- 📍 Auto-detects location via GPS  
+- 🕰️ Displays daily prayer times: Fajr, Sunrise, Dhuhr, Asr, Maghrib, Isha  
+- 🔁 Pull-to-refresh for real-time updates  
+- 🗓️ Shows both Gregorian and Hijri calendar dates  
+- 🕒 Converts times to 12-hour AM/PM format  
+- ⚡ Built with Expo Router and TypeScript  
 
-#🛠️ Installation
-bash
-Copy
-Edit
-git clone https://github.com/your-username/athan.git
-cd athan
-npm install
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js ≥ 18.x  
+- npm ≥ 9.x  
+- Expo CLI:  
+  npm install -g expo-cli
+
+### Installation
+
+git clone https://github.com/your-username/athan.git  
+cd athan  
+npm install  
 npx expo start
 
-You can also run it on:
-Android: npm run android
-iOS: npm run ios
-Web: npm run web
+### Run on Device or Simulator
 
-#🔐 Permissions
-This app requests the following permission:
-Location: To determine current coordinates for accurate prayer times.
+npm run android   # Run on Android  
+npm run ios       # Run on iOS  
+npm run web       # Run in browser  
 
-#🔮 To-Do
-⏰ Local notifications for each prayer
-⚙️ Customizable calculation methods (ISNA, MWL, Umm al-Qura)
-🌙 Dark mode theme
-🌐 Manual city search & offline support
+## 📂 Project Structure
 
-#📄 License
-MIT © Omar Mostafiz
+athan/  
+├── app/                   # App screens and routes  
+│   └── index.tsx          # Main prayer times screen  
+├── scripts/  
+│   └── reset-project.js   # Custom cleanup script  
+├── package.json  
+├── README.md  
+└── ...  
 
+## 🔐 Permissions
+
+- **Location** – used to fetch coordinates for calculating prayer times.  
+  Make sure location services are enabled on your device.
+
+
+## 🧭 To-Do
+
+- [ ] Add local notifications for each prayer  
+- [ ] Allow manual location input  
+- [ ] Add dark mode  
+- [ ] Add multiple calculation methods  
+- [ ] Offline support with caching  
+
+## 📄 License
+
+MIT License  
+© 2025 Your Name
+
+## 🙏 Acknowledgments
+
+- Aladhan API (https://aladhan.com/prayer-times-api)  
+- React Native (https://reactnative.dev/)  
+- Expo (https://expo.dev/)

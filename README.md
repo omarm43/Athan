@@ -1,50 +1,47 @@
-# Welcome to your Expo app 👋
+🕌 Athan – Muslim Prayer Times App (Work In Progress)
+Athan is a lightweight mobile app built with React Native and Expo that shows daily Muslim prayer times based on your real-time location. It fetches data from the Aladhan API and supports pull-to-refresh, both Gregorian and Hijri calendars, and 12-hour formatting.
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+📱 Features
+📍 Auto-detects location to display prayer times
+🕰️ Fajr, Dhuhr, Asr, Maghrib, Isha + Sunrise
+🔁 Pull-to-refresh to update times and location
+📆 Shows both Gregorian and Hijri dates
+⏱ Converts times to 12-hour AM/PM format
 
-## Get started
+⚡ Built using Expo Router for fast routing and navigation
 
-1. Install dependencies
+🧰 Tech Stack
+React Native (via Expo)
+Expo Router for file-based navigation
+expo-location for GPS access
+Aladhan API for prayer time data
+TypeScript for static typing
+Jest for testing
 
-   ```bash
-   npm install
-   ```
+🛠️ Installation
+bash
+Copy
+Edit
+git clone https://github.com/your-username/athan.git
+cd athan
+npm install
+npx expo start
 
-2. Start the app
+You can also run it on:
+Android: npm run android
+iOS: npm run ios
+Web: npm run web
 
-   ```bash
-    npx expo start
-   ```
+🔐 Permissions
+This app requests the following permission:
+Location: To determine current coordinates for accurate prayer times.
 
-In the output, you'll find options to open the app in a
+🔮 To-Do
+⏰ Local notifications for each prayer
+⚙️ Customizable calculation methods (ISNA, MWL, Umm al-Qura)
+🌙 Dark mode theme
+🌐 Manual city search & offline support
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+📄 License
+MIT © Omar Mostafiz
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
